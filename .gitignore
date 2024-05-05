@@ -1,0 +1,6 @@
+# Exclude files backups.
+*.kate-swp
+*~
+
+# Exclude CMake Genetarion.
+/cmake-build-debug/
