@@ -14,4 +14,4 @@ These are the tools I used to create my game assets.
 
 ## Powered by
 
-[<img src="https://www.libsdl.org/media/SDL_logo.png" alt="SDL2" width="150px">](https://www.libsdl.org/)
+[<img src="https://www.libsdl.org/media/SDL_logo.png" alt="SDL2" width="150px">](https://www.libsdl.org/) [<img src="https://cmake.org/wp-content/uploads/2023/08/CMake-Logo.svg" alt="CMake" width="150px">](https://cmake.org/)
