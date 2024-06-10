@@ -27,8 +27,9 @@ These are the tools I used to create my game assets.
 
 Use these assets on your own projects!
 
-[Get sprites](https://opengameart.org/content/space-ships-sprites)
-[Get sounds and music](https://opengameart.org/content/space-ships-sounds-and-bg-music)
+[Get the sprites](https://opengameart.org/content/space-ships-sprites)
+
+[Get the sounds and music](https://opengameart.org/content/space-ships-sounds-and-bg-music)
 
 ## Powered by
 
