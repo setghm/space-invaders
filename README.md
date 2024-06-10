@@ -1,7 +1,7 @@
 # Space Invaders Game
 Set HM 2023
 
-The game is entirely written in C using SDL2.
+The game was entirely written in C using SDL2.
 
 ![spaceinvaders-preview](https://github.com/setghm/space-invaders/assets/53455269/7e9bbf92-8e59-4167-b1a1-9dce1d7c044b)
 
