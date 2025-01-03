@@ -7,8 +7,9 @@
 *.kate-swp
 *~
 
-# Exclude CMake Genetarion.
+# Exclude CMake Genetarion and build directories.
 /cmake-build-debug/
 /cmake-build-release/
 /build/
 /out/
+/installed/

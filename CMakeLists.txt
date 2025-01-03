@@ -83,11 +83,37 @@ list(APPEND SourceFiles
 	${GameSources}
 )
 
-add_executable(${APPNAME} ${SourceFiles})
+# Add resources for each platform.
+
+if (WIN32)
+	list(APPEND SourceFiles "res/windows/resource.rc")
+endif()
+
+# Add the executable.
+
+if (WIN32 AND CMAKE_BUILD_TYPE STREQUAL "Release")
+	# In release mode on Windows don't show the console window setting the target
+	# executable to a Win32 application.
+	add_executable(${APPNAME} WIN32 ${SourceFiles})
+else()
+	add_executable(${APPNAME} ${SourceFiles})
+endif()
+
 target_link_libraries(${APPNAME} SDL2::SDL2 SDL2::SDL2main SDL2_image::SDL2_image SDL2_mixer::SDL2_mixer m)
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
 	set_property(TARGET ${APPNAME} PROPERTY C_STANDARD 11)
 endif()
 
-add_custom_command(TARGET ${APPNAME} POST_BUILD COMMAND ${APPNAME} WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+# After the build copy the assets folder into the build directory.
+
+file(COPY "${PROJECT_SOURCE_DIR}/assets" DESTINATION ${CMAKE_BINARY_DIR})
+
+# Configure installation target.
+
+set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/installed")
+install(TARGETS ${APPNAME} RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX})
+install(DIRECTORY "${PROJECT_SOURCE_DIR}/assets" DESTINATION ${CMAKE_INSTALL_PREFIX})
+
+file(GLOB_RECURSE DYNAMIC_LIBS "${CMAKE_BINARY_DIR}/*.dll" "${CMAKE_BINARY_DIR}/*.so")
+install(FILES ${DYNAMIC_LIBS} DESTINATION ${CMAKE_INSTALL_PREFIX})
