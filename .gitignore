@@ -9,3 +9,6 @@
 
 # Exclude CMake Genetarion.
 /cmake-build-debug/
+/cmake-build-release/
+/build/
+/out/

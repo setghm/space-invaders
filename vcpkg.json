@@ -1,0 +1,6 @@
+{
+  "dependencies" : [ "sdl2-mixer", "sdl2-image", {
+    "name" : "sdl2",
+    "version>=" : "2.30.10"
+  } ]
+}

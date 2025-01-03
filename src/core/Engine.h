@@ -8,9 +8,9 @@
 #include <stdio.h>
 #include <limits.h>
 
-//#ifdef __linux__
+#ifdef __linux__
 #include <unistd.h>
-//#endif
+#endif
 
 #include "Config.h"
 

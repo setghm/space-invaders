@@ -84,5 +84,10 @@ list(APPEND SourceFiles
 )
 
 add_executable(${APPNAME} ${SourceFiles})
-target_link_libraries(${APPNAME} SDL2 SDL2main SDL2_image SDL2_mixer m)
-#add_custom_command(TARGET ${APPNAME} POST_BUILD COMMAND ${APPNAME} WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
+target_link_libraries(${APPNAME} SDL2::SDL2 SDL2::SDL2main SDL2_image::SDL2_image SDL2_mixer::SDL2_mixer m)
+
+if (CMAKE_VERSION VERSION_GREATER 3.12)
+	set_property(TARGET ${APPNAME} PROPERTY C_STANDARD 11)
+endif()
+
+add_custom_command(TARGET ${APPNAME} POST_BUILD COMMAND ${APPNAME} WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})

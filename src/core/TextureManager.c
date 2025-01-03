@@ -2,7 +2,12 @@
 
 #include <stdlib.h>
 #include <string.h>
+
+#ifdef __linux__
 #include <unistd.h>
+#else
+#define F_OK 0
+#endif
 
 #include <Config.h>
 
