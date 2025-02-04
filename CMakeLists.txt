@@ -47,6 +47,8 @@ list(APPEND CoreSources
 	src/core/Engine.h
 	src/core/Engine.c
 
+	src/core/AssetsPath.h
+	src/core/AssetsPath.c
 	src/core/TextureManager.h
 	src/core/TextureManager.c
 	src/core/SoundManager.h
@@ -105,6 +107,17 @@ if (CMAKE_VERSION VERSION_GREATER 3.12)
 	set_property(TARGET ${APPNAME} PROPERTY C_STANDARD 11)
 endif()
 
+# Add compile definitions.
+
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+	target_compile_definitions(${APPNAME} PRIVATE DEBUG=1)
+	# Uncomment the next line to debug collision boxes.
+	#target_compile_definitions(${APPNAME} PRIVATE DEBUG_PHYSICS=1)
+elseif (LINUX AND CMAKE_BUILD_TYPE STREQUAL "Release")
+	# Build AppImage file.
+	target_compile_definitions(${APPNAME} PRIVATE BUILD_APPIMAGE=1)
+endif()
+
 # After the build copy the assets folder into the build directory.
 
 file(COPY "${PROJECT_SOURCE_DIR}/assets" DESTINATION ${CMAKE_BINARY_DIR})
@@ -112,8 +125,14 @@ file(COPY "${PROJECT_SOURCE_DIR}/assets" DESTINATION ${CMAKE_BINARY_DIR})
 # Configure installation target.
 
 set(CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/installed")
-install(TARGETS ${APPNAME} RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX})
-install(DIRECTORY "${PROJECT_SOURCE_DIR}/assets" DESTINATION ${CMAKE_INSTALL_PREFIX})
 
-file(GLOB_RECURSE DYNAMIC_LIBS "${CMAKE_BINARY_DIR}/*.dll" "${CMAKE_BINARY_DIR}/*.so")
-install(FILES ${DYNAMIC_LIBS} DESTINATION ${CMAKE_INSTALL_PREFIX})
+if (WIN32)
+	install(TARGETS ${APPNAME} RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX})
+	install(DIRECTORY "${PROJECT_SOURCE_DIR}/assets" DESTINATION ${CMAKE_INSTALL_PREFIX})
+
+	file(GLOB_RECURSE DYNAMIC_LIBS "${CMAKE_BINARY_DIR}/*.dll" "${CMAKE_BINARY_DIR}/*.so")
+	install(FILES ${DYNAMIC_LIBS} DESTINATION ${CMAKE_INSTALL_PREFIX})
+elseif (LINUX)
+	install(TARGETS ${APPNAME} RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX})
+	install(DIRECTORY "${PROJECT_SOURCE_DIR}/assets" DESTINATION ${CMAKE_INSTALL_PREFIX})
+endif()

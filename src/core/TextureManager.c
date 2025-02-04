@@ -3,13 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#ifdef __linux__
-#include <unistd.h>
-#else
-#define F_OK 0
-#endif
-
-#include <Config.h>
+#include <AssetsPath.h>
 
 struct _MemoryTexture_ {
     char *name;
@@ -38,21 +32,15 @@ void TextureManager_Init(SDL_Renderer *_renderer) {
 }
 
 void TextureManager_Load(const char *name, const char *filename) {
-    // Prepend the filename with the assets directory
-    char *fpath = (char *) malloc(strlen(filename) + strlen(ASSETS_DIRECTORY) + 1);
-    sprintf(fpath, "%s%s\0", ASSETS_DIRECTORY, filename);
+    char *fpath = AssetsPath_Resolve(filename);
+
+    if (fpath == NULL) {
+        return; // The file doesn't exist.
+    }
 
 #ifdef DEBUG
     fprintf(stderr, "LOG: loading %s (%s)...", fpath, name);
 #endif
-
-	// Check if the file exists
-    if (access(fpath, F_OK) != 0) {
-#ifdef DEBUG
-        fprintf(stderr, "\tERROR the file doesn't exists\n");
-#endif
-        return;
-    }
 
     // Create a new texture
     struct _MemoryTexture_ *mem = (struct _MemoryTexture_ *) malloc(sizeof(struct _MemoryTexture_));
@@ -86,6 +74,7 @@ void TextureManager_Load(const char *name, const char *filename) {
 #ifdef DEBUG
     fprintf(stderr, "\tLOADED! (name: \"%s\")\n", name);
 #endif
+    free(fpath);
 }
 
 SDL_Texture *TextureManager_Get(const char *name, SDL_Rect *rect_copy_dest) {

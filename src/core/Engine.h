@@ -6,6 +6,7 @@
 #include <stdbool.h>
 #include <inttypes.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <limits.h>
 
 #ifdef __linux__
@@ -14,6 +15,7 @@
 
 #include "Config.h"
 
+#include <AssetsPath.h>
 #include <TextureManager.h>
 #include <SoundManager.h>
 #include <GameObjects.h>

@@ -4,15 +4,12 @@
 #ifndef __CONFIG_H__
 #define __CONFIG_H__
 
-//#define DEBUG
-//#define DEBUG_PHYSICS
-
 #define PIXELS(pixels)							(pixels * DEFAULT_SCALE)
 #define PIXELS_PER_SECOND(pps)					(pps * DEFAULT_SCALE)
 
 // Engine Configuration
 
-#define ASSETS_DIRECTORY						"./assets/"
+#define ASSETS_DIRECTORY						"assets"
 #define DEFAULT_SCALE							5
 #define WINDOW_WIDTH							PIXELS(128)
 #define WINDOW_HEIGHT							PIXELS(96)

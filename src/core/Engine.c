@@ -5,6 +5,12 @@
 
 #include <time.h>
 
+#ifdef __linux__
+#include <unistd.h>
+#else
+#include <io.h>
+#endif
+
 struct {
 	SDL_Window *window;
 	SDL_Renderer *renderer;
@@ -55,6 +61,10 @@ bool Engine_Init() {
 
 	SDL_SetRenderDrawBlendMode(Engine.renderer, SDL_BLENDMODE_BLEND);
 
+	if (AssetsPath_Init() != 0) {
+		return false;
+	}
+
 	SoundManager_Init();
 	TextureManager_Init(Engine.renderer);
 
@@ -66,6 +76,7 @@ bool Engine_Init() {
 void Engine_Close() {
 	Game_Release();
 
+	AssetsPath_Clean();
 	TextureManager_Clean();
 	SoundManager_Clean();
 

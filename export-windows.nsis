@@ -1,0 +1,35 @@
+; This NSIS script generates a portable EXE file that contains
+; the required files to run the game.
+;
+
+; Set the filename and icon of the portable EXE file.
+OutFile "dist\SpaceInvaders.exe"
+Icon "res\windows\icon.ico"
+
+; Remove administrator privileges requirement.
+RequestExecutionLevel user
+
+; Silent configuration (don't show GUI)
+SilentInstall silent
+SilentUnInstall silent
+
+Name "SpaceInvaders"
+
+InstallDir $TEMP\setghm-space-invaders
+
+Section
+    SetOutPath $INSTDIR
+
+    ; Archive all files under install directory.
+    File /r "installed\*"
+
+    ; Execute the actual game EXE file and wait until the user closes it.
+    ExecWait "$INSTDIR\SpaceInvaders.exe"
+
+    ; Remove game files under temp directory.
+    Sleep 1000
+    RMDir /r $INSTDIR
+    Sleep 500
+    RMDir $INSTDIR
+    Quit
+SectionEnd

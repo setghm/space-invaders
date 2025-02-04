@@ -16,6 +16,8 @@ cmake ..
 cmake --build .
 ```
 
+Compile the game with a recent version of **GCC** or with **clang** to avoid problems. 
+
 ## Tools used
 
 These are the tools I used to create my game assets.
