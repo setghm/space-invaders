@@ -30,7 +30,7 @@ void AnimatedSprite_Draw(AnimatedSprite *animated_sprite, SDL_Renderer *renderer
     bool playable = !(animated_sprite->animation->_begin == animated_sprite->animation->_end && animated_sprite->animation->frame_count <= 2);
 
     if (animated_sprite->playing && playable) {
-        float current_time = SDL_GetTicks64() / 1000.0f;
+        float current_time = SDL_GetTicks() / 1000.0f;
         animated_sprite->elapsed_time += current_time - animated_sprite->last_time;
         animated_sprite->last_time = current_time;
 

@@ -101,7 +101,15 @@ else()
 	add_executable(${APPNAME} ${SourceFiles})
 endif()
 
-target_link_libraries(${APPNAME} SDL2::SDL2 SDL2::SDL2main SDL2_image::SDL2_image SDL2_mixer::SDL2_mixer m)
+# Link libraries.
+
+if (NOT SDL2::SDL2)
+    target_link_libraries(${APPNAME} SDL2 SDL2main SDL2_image SDL2_mixer m)
+else()
+    target_link_libraries(${APPNAME} SDL2::SDL2 SDL2::SDL2main SDL2_image::SDL2_image SDL2_mixer::SDL2_mixer m)
+endif()
+
+# Set C standard to C11.
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
 	set_property(TARGET ${APPNAME} PROPERTY C_STANDARD 11)
@@ -113,8 +121,8 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	target_compile_definitions(${APPNAME} PRIVATE DEBUG=1)
 	# Uncomment the next line to debug collision boxes.
 	#target_compile_definitions(${APPNAME} PRIVATE DEBUG_PHYSICS=1)
-elseif (LINUX AND CMAKE_BUILD_TYPE STREQUAL "Release")
-	# Build AppImage file.
+elseif (UNIX AND NOT APPLE AND CMAKE_BUILD_TYPE STREQUAL "Release")
+	# Build AppImage file on Linux.
 	target_compile_definitions(${APPNAME} PRIVATE BUILD_APPIMAGE=1)
 endif()
 
@@ -132,7 +140,7 @@ if (WIN32)
 
 	file(GLOB_RECURSE DYNAMIC_LIBS "${CMAKE_BINARY_DIR}/*.dll" "${CMAKE_BINARY_DIR}/*.so")
 	install(FILES ${DYNAMIC_LIBS} DESTINATION ${CMAKE_INSTALL_PREFIX})
-elseif (LINUX)
+elseif (UNIX AND NOT APPLE)
 	install(TARGETS ${APPNAME} RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX})
 	install(DIRECTORY "${PROJECT_SOURCE_DIR}/assets" DESTINATION ${CMAKE_INSTALL_PREFIX})
 endif()

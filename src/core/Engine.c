@@ -94,7 +94,7 @@ void Engine_MainLoop() {
 	atexit(Engine_Close);
 
 	while (!Engine.quit) {
-		uint64_t current_time = SDL_GetTicks64();
+		uint64_t current_time = SDL_GetTicks();
 		float delta_time = (current_time - Engine.last_time) / 1000.0f;
 		Engine.last_time = current_time;
 

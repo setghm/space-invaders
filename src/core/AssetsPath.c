@@ -27,11 +27,11 @@ int AssetsPath_Init(void) {
         return -1;
     }
 
-    int len = strlen(appdir) + strlen("/"ASSETS_DIRECTORY) + 1;
+    int len = strlen(appdir) + strlen("/usr/share/"ASSETS_DIRECTORY) + 1;
 
     assets_path = (char*) malloc(len);
     memset(assets_path, 0, len);
-    sprintf(assets_path, "%s/%s", appdir, ASSETS_DIRECTORY);
+    sprintf(assets_path, "%s/usr/share/%s", appdir, ASSETS_DIRECTORY);
 #else
     assets_path = ASSETS_DIRECTORY;
 #endif
