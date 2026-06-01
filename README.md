@@ -1,5 +1,4 @@
 # Space Invaders Game
-Set HM 2023
 
 The game was entirely written in C using SDL2.
 
@@ -32,7 +31,3 @@ Use these assets on your own projects!
 [Get the sprites](https://opengameart.org/content/space-ships-sprites)
 
 [Get the sounds and music](https://opengameart.org/content/space-ships-sounds-and-bg-music)
-
-## Powered by
-
-[<img src="https://www.libsdl.org/media/SDL_logo.png" alt="SDL2" width="150px">](https://www.libsdl.org/) [<img src="https://cmake.org/wp-content/uploads/2023/08/CMake-Logo.svg" alt="CMake" width="150px">](https://cmake.org/)
