@@ -15,19 +15,18 @@ cmake ..
 cmake --build .
 ```
 
-Compile the game with a recent version of **GCC** or with **clang** to avoid problems. 
+Compile the game with a recent version of **GCC** or with **clang** to avoid issues. 
 
 ## Tools used
 
 These are the tools I used to create my game assets.
 
-- Sprites
-    - [Krita](https://krita.org/)
-- FX and music
-    - [LMMS](https://lmms.io/)
+* Sprites
+    * [Krita](https://krita.org/)
+* FX and music
+    * [LMMS](https://lmms.io/)
 
-Use these assets on your own projects!
+Use my assets in your own projects for free!
 
-[Get the sprites](https://opengameart.org/content/space-ships-sprites)
-
-[Get the sounds and music](https://opengameart.org/content/space-ships-sounds-and-bg-music)
+* [Get the sprites](https://opengameart.org/content/space-ships-sprites)
+* [Get the sounds and music](https://opengameart.org/content/space-ships-sounds-and-bg-music)
