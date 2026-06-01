@@ -1,4 +1,4 @@
-# Space Invaders Game
+# Space Shooter Game
 
 The game was entirely written in C using SDL2.
 
